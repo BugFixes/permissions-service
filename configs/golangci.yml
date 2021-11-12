@@ -1,0 +1,51 @@
+run:
+  concurrency: 4
+  deadline: 2m
+  issues-exit-code: 10
+  tests: true
+
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters-settings:
+  gofmt:
+    simplify: true
+  gocyclo:
+    min-complexity: 10
+  maligned:
+    suggest-new: true
+  govet:
+    disable:
+      - printf
+
+linters:
+  enable:
+    - bodyclose
+    - deadcode
+    - errcheck
+    - errorlint
+    - goconst
+    - gocritic
+    - gocyclo
+    - goimports
+    - gosimple
+    - gosec
+    - govet
+    - ineffassign
+    - nakedret
+    - staticcheck
+    - structcheck
+    - stylecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
+  enable-all: false
+  fast: false
+
+issue:
+  exclude-use-default: true
+  max-issues-per-linter: 0
+  max-same-issue: 0

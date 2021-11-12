@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: permissions
+  namespace: bugfixes
+  labels:
+    name: permissions
+spec:
+  selector:
+    matchLabels:
+      app: permissions
+  template:
+    metadata:
+      labels:
+        app: permissions
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: permissions
+          image: ghcr.io/permissions/agent-service:0.1.16
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DEVELOPMENT
+              value: "false"
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vault-token-agent-service
+                  key: token
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: permissions
+  namespace: bugfixes
+  labels:
+    app: agent-service
+spec:
+  ports:
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    app: permissions
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: bugfixes
+  name: permissions-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    certmanager.k8s.io/cluster-issuer: acme-prod
+  labels:
+    app: permissions
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.bugfixes.dev
+      secretName: bugfixes-dev-tls
+  rules:
+    - host: api.bugfixes.dev
+      http:
+        paths:
+          - path: /v1/permissions(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: permissions
+                port:
+                  number: 3000
