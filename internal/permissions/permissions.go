@@ -1,7 +1,7 @@
 package permissions
 
 import (
-  "net/http"
+	"net/http"
 )
 
 func CheckPermissions(w http.ResponseWriter, r *http.Request) {
