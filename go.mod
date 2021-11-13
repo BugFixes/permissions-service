@@ -5,7 +5,9 @@ go 1.17
 require (
 	github.com/bugfixes/go-bugfixes v0.7.1
 	github.com/caarlos0/env/v6 v6.7.2
+	github.com/go-chi/chi/v5 v5.0.5
 	github.com/hashicorp/vault/api v1.3.0
+	github.com/keloran/go-probe v0.0.0-20210417224119-539dae99a65e
 )
 
 require (
