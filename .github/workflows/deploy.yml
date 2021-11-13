@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/bugfixes/permissions-service
+          tags: |
+            type=semver,pattern={{version}}
+            type=sha
+      - name: QEMU
+        uses: docker/setup-qemu-action@v1
+        id: qemu
+        with:
+          platforms: arm64,amd64
+      - name: Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+      - name: Login Github
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_SECRET }}
+      - name: Build and Push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          builder: ${{ steps.buildx.outputs.name }}
+          platforms: linux/arm64
+          file: ./k8s/Dockerfile
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          push: true
