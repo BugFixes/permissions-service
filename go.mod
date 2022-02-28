@@ -6,7 +6,7 @@ require (
 	github.com/bugfixes/go-bugfixes v0.7.1
 	github.com/caarlos0/env/v6 v6.9.1
 	github.com/go-chi/chi/v5 v5.0.7
-	github.com/hashicorp/vault/api v1.3.1
+	github.com/hashicorp/vault/api v1.4.1
 	github.com/keloran/go-probe v0.0.0-20210417224119-539dae99a65e
 )
 
@@ -34,7 +34,7 @@ require (
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/hashicorp/vault/sdk v0.3.0 // indirect
+	github.com/hashicorp/vault/sdk v0.4.1 // indirect
 	github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
