@@ -3,7 +3,7 @@ module github.com/bugfixes/permissions
 go 1.17
 
 require (
-	github.com/bugfixes/go-bugfixes v0.7.1
+	github.com/bugfixes/go-bugfixes v0.8.4
 	github.com/caarlos0/env/v6 v6.9.1
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/hashicorp/vault/api v1.5.0
