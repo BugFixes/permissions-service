@@ -3,7 +3,7 @@ module github.com/bugfixes/permissions
 go 1.17
 
 require (
-	github.com/bugfixes/go-bugfixes v0.7.1
+	github.com/bugfixes/go-bugfixes v0.8.5
 	github.com/caarlos0/env/v6 v6.9.1
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/hashicorp/vault/api v1.5.0
@@ -15,7 +15,7 @@ require (
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/cenkalti/backoff/v3 v3.0.0 // indirect
 	github.com/fatih/color v1.7.0 // indirect
-	github.com/go-logfmt/logfmt v0.5.1 // indirect
+	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
